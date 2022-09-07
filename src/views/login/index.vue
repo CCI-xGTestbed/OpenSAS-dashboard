@@ -3,7 +3,26 @@
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
 
       <div class="title-container">
-        <h3 class="title">OpenSAS login</h3>
+        <div class="flex-container">
+          <div class="flex-child">
+            <img
+              class="vt-img"
+              :src="require (`@/assets/logos/Horizontal_VT_Full_Color_RGB.png`)"
+              alt
+            />
+          </div>
+          <div class="flex-child">
+            <img
+              class="cci-img"
+              :src="require (`@/assets/logos/CCI-main-hort-rgb-rev.png`)"
+              alt
+            />
+          </div>
+        </div>
+        <h3 class="title">OpenSAS Portal</h3>
+        <div class="subtitle-container">
+          <h7 class="subtitle">An open source platform for spectrum sharing experiments</h7>
+        </div>
       </div>
 
       <el-form-item prop="username">
@@ -173,9 +192,36 @@ $cursor: #fff;
 </style>
 
 <style lang="scss" scoped>
-$bg:#2d3a4b;
+$bg:#1f1f1f;
 $dark_gray:#889aa4;
 $light_gray:#eee;
+.vt-img {
+  scale: 34%;
+  display: block;
+  position: relative;
+  left: -280px;
+  top: -17px;
+}
+
+.cci-img {
+  scale: 34%;
+  display: block;
+  position: relative;
+  left: -711px;
+  top: -33px;
+}
+
+.flex-container {
+  display: flex;
+}
+
+.flex-child {
+  flex: 1;
+}
+
+.flex-child:first-child {
+  margin-right: 20px;
+}
 
 .login-container {
   min-height: 100%;
@@ -221,6 +267,18 @@ $light_gray:#eee;
       margin: 0px auto 40px auto;
       text-align: center;
       font-weight: bold;
+    }
+  }
+
+  .subtitle-container {
+    position: relative;
+    left: 44px;
+    bottom: 30px;
+    .subtitle {
+      font-size: 14px;
+      color: $light_gray;
+      margin: 0px auto 40px auto;
+      text-align: center;
     }
   }
 
