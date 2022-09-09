@@ -20,7 +20,9 @@
         :key="index"
         v-for="(m, index) in markers"
         :position="m.position"
+        :icon="require (`@/assets/logos/wifi-logo.png`)"
         @click="center=m.position"
+        v-on:click="cbsdClicked"
       />
     </GmapMap>
   </div>
@@ -33,7 +35,25 @@ export default {
     return {
       center: { lat: 45.508, lng: -73.587 },
       currentPlace: null,
-      markers: [],
+      markers: [{
+      position:
+        {
+          lat: 38.88092897208466,
+          lng: -77.11567323046333
+        },
+      icon: {
+        url: "require (`@/assets/logos/Horizontal_VT_Full_Color_RGB.png`)",
+        scaledSize: {width: 2, height: 2},
+        labelOrigin: {x: 16, y: -10}
+        },
+      title: 'title',
+      label: {
+        text: 'label',
+        color: "black",
+        fontWeight: "bold",
+        fontSize: "12px"
+      }
+    }],
       places: [],
     }
   },
@@ -41,6 +61,9 @@ export default {
     this.geolocate();
   },
   methods: {
+    cbsdClicked(){
+      this.$root.$emit('cbsd_clicked', 'do deed');
+    },
     setPlace(place) {
       this.currentPlace = place;
     },

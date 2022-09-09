@@ -19,6 +19,7 @@
     "bootstrap-vue": "^2.22.0",
     "core-js": "3.6.5",
     "element-ui": "2.13.2",
+    "gmap-vue": "^3.5.4",
     "js-cookie": "2.2.0",
     "normalize.css": "7.0.0",
     "nprogress": "0.2.0",

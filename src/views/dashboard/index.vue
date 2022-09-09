@@ -1,8 +1,10 @@
 <template>
   <div class="dashboard-container">
-    <div><GoogleMap /></div>
     <div>
-      <b-button v-b-toggle.sidebar-no-header>Toggle Sidebar</b-button>
+    <GoogleMap/>
+    </div>
+    <div>
+      <b-button hidden v-b-toggle.sidebar-no-header>Toggle Sidebar</b-button>
       <b-sidebar
         id="sidebar-no-header"
         aria-labelledby="sidebar-no-header-title"
@@ -114,6 +116,28 @@ export default {
   name: "Dashboard",
   data() {
     return {
+      done: true,
+      markers: [
+     {
+      position:
+        {
+          lat: 38.88092897208466,
+          lng: -77.11567323046333
+        },
+      icon: {
+        url: "require (`@/assets/logos/Horizontal_VT_Full_Color_RGB.png`)",
+        scaledSize: {width: 28, height: 28},
+        labelOrigin: {x: 16, y: -10}
+        },
+      title: 'title',
+      label: {
+        text: 'label',
+        color: "black",
+        fontWeight: "bold",
+        fontSize: "12px"
+      }
+    }
+    ],
       Requests: {
         registrationRequest: [
           {
@@ -148,6 +172,14 @@ export default {
   },
   components: {
     GoogleMap,
+  },
+  
+  created(){
+    this.$root.$on('cbsd_clicked', (text) => {
+      this.text = text;
+      this.$root.$emit('bv::toggle::collapse', 'sidebar-no-header')
+    });
+    
   },
   computed: {
     ...mapGetters(["name"]),
