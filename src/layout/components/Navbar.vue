@@ -1,9 +1,9 @@
 <template>
   <div class="navbar">
+    
     <hamburger :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" />
-
     <breadcrumb class="breadcrumb-container" />
-
+    
     <div class="right-menu">
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
@@ -61,11 +61,12 @@ export default {
 
 <style lang="scss" scoped>
 .navbar {
-  height: 50px;
-  overflow: hidden;
-  position: relative;
-  background: #fff;
-  box-shadow: 0 1px 4px rgba(0,21,41,.08);
+  --bs-navbar-padding-y: 0.0rem;
+  height: 50px !important;
+  overflow: hidden !important;
+  position: relative !important;
+  background: #fff !important;
+  box-shadow: 0 1px 4px rgba(0,21,41,.08) !important;
 
   .hamburger-container {
     line-height: 46px;

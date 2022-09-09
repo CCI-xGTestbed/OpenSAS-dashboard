@@ -45,7 +45,7 @@ Vue.use(ElementUI, { locale })
 
 Vue.use(VueGoogleMaps, {
   load: {
-    key: 'AIzaSyA9i7Z1g3bYBbNuPMwB-O58DOe-nuoHpSo',
+    key: 'AIzaSyAqfE9MoEGhEN17IcmQ2hbezoYTZAcAFdQ',
     libraries: 'places'
   }
 })
