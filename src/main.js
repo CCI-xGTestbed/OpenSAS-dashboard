@@ -17,6 +17,18 @@ import App from './App'
 import store from './store'
 import router from './router'
 
+import VueSocketIO from 'vue-socket.io'
+Vue.use(new VueSocketIO({
+  debug: true,
+  connection: 'http://localhost:8000',
+  vuex: {
+      store,
+      actionPrefix: 'SOCKET_',
+      mutationPrefix: 'SOCKET_'
+  },
+  options: {  transports: ['websocket', 'polling', 'flashsocket'] } //Optional options
+}))
+
 import '@/icons' // icon
 import '@/permission' // permission control
 
