@@ -13,27 +13,47 @@
     <br>
     <GmapMap
       :center='center'
-      :zoom='12'
+      :zoom='zoom'
       style='width: 100%;  height: 800px;'
     >
+    <div :key="index"
+        v-for="(item, index) in this.List"
+        :aria-label="item.cbsdId"
+        
+        >
+        <div :id="item.cbsdId">
       <GmapMarker
-        :key="index"
-        v-for="(m, index) in markers"
-        :position="m.position"
+        :position="item.position"
+        :label="item.fccId"
         :icon="require (`@/assets/logos/wifi-logo.png`)"
-        @click="center=m.position"
-        v-on:click="cbsdClicked"
+        v-on:click="cbsdClicked(item.cbsdId)"
       />
+    </div>
+    </div>
     </GmapMap>
   </div>
 </template>
 
 <script>
 export default {
+  props: [ 'List'  ],
+  watch: {
+    $props: {
+      handler() {
+        if (this.$props.List.length > 0){
+          this.center = this.List[0].position;
+          this.zoom = 19;
+        }
+      },
+      deep: true,
+      immediate: true,
+    },
+  },
   name: 'GoogleMap',
   data() {
     return {
-      center: { lat: 45.508, lng: -73.587 },
+      center: { lat: 39.29647910169052, lng: -98.10019483966342 },
+      zoom: 5,
       currentPlace: null,
       markers: [{
       position:
@@ -42,8 +62,8 @@ export default {
           lng: -77.11567323046333
         },
       icon: {
-        url: "require (`@/assets/logos/Horizontal_VT_Full_Color_RGB.png`)",
-        scaledSize: {width: 2, height: 2},
+        url: require (`@/assets/logos/wifi-logo.png`),
+        scaledSize: {width: 40, height: 40},
         labelOrigin: {x: 16, y: -10}
         },
       title: 'title',
@@ -61,8 +81,10 @@ export default {
     this.geolocate();
   },
   methods: {
-    cbsdClicked(){
-      this.$root.$emit('cbsd_clicked', 'do deed');
+    cbsdClicked(event){
+      this.$root.$emit('cbsd_clicked', event)
+      console.log(this.List)
+      
     },
     setPlace(place) {
       this.currentPlace = place;
