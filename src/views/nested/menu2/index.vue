@@ -163,10 +163,14 @@ export default {
               this.Spectrum[data[i].subband - 1].isUsed = true;
             }
             else{
-              if (data.accessPriority == "PAL")
+              if (data.accessPriority == "PAL"){
                 this.Spectrum[data[i].subband - 1].usePriority = 3;
-              else
+                this.Spectrum[data[i].subband - 1].isUsed = true;
+              }
+              else{
                 this.Spectrum[data[i].subband - 1].usePriority = 2;
+                this.Spectrum[data[i].subband - 1].isUsed = true;
+              }
             }
           }
 
