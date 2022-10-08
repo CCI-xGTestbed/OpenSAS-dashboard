@@ -24,7 +24,8 @@
         <div :id="item.cbsdId">
       <GmapMarker
         :position="item.position"
-        :icon="require (`@/assets/logos/wifi-logo.png`)"
+        :icon="require (`@/assets/logos/antenna-6.png`)"
+        :label="item.fccId"
         v-on:click="cbsdClicked(item.cbsdId)"
       />
     </div>

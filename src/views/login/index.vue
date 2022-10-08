@@ -3,18 +3,26 @@
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
 
       <div class="title-container">
-        <div class="flex-container">
-          <div class="flex-child">
+        <div class="flex-container" style="max-height: 10px;">
+          <div class="flex-child vt-img"  >
             <img
-              class="vt-img"
+              
               :src="require (`@/assets/logos/Horizontal_VT_Full_Color_RGB.png`)"
               alt
             />
           </div>
-          <div class="flex-child">
+          <div class="flex-child cci-img">
             <img
-              class="cci-img"
+              
               :src="require (`@/assets/logos/CCI-main-hort-rgb-rev.png`)"
+              alt
+            />
+          </div>
+        </div>
+        <div class="flex-container" style="max-height: 250px;">
+          <div class="flex-child xg-img">
+            <img
+              :src="require (`@/assets/logos/xG-4c.png`)"
               alt
             />
           </div>
@@ -60,7 +68,7 @@
         </span>
       </el-form-item>
 
-      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
+      <el-button :loading="loading" class="login-btn" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
 
       <div class="tips">
         <span style="margin-right:20px;">username: admin</span>
@@ -208,7 +216,15 @@ $light_gray:#eee;
   display: block;
   position: relative;
   left: -711px;
-  top: -33px;
+  top: -24px;
+}
+
+.xg-img {
+  scale: 28%;
+  display: block;
+  position: relative;
+  left: 0px;
+  top: 0px;
 }
 
 .flex-container {
@@ -223,6 +239,12 @@ $light_gray:#eee;
   margin-right: 20px;
 }
 
+.login-btn {
+  color: #FFF;
+  background-color: #e47439;
+  border-color: #e47439;
+}
+
 .login-container {
   min-height: 100%;
   width: 100%;
@@ -233,7 +255,7 @@ $light_gray:#eee;
     position: relative;
     width: 520px;
     max-width: 100%;
-    padding: 160px 35px 0;
+    padding: 120px 35px 0;
     margin: 0 auto;
     overflow: hidden;
   }
