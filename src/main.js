@@ -21,7 +21,7 @@ import VueSocketIO from 'vue-socket.io'
 import * as io from "socket.io-client";
 Vue.use(new VueSocketIO({
   debug: true,
-  connection: 'http://localhost:8000',
+  connection: 'http://38.68.232.195:8000',
   options: {  transports: ['websocket', 'polling',  'flashsocket'] } //Optional options
 }))
 
