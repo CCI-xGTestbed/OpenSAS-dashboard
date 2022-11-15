@@ -1,15 +1,6 @@
 <template>
   <div>
-    <div>
-      <GmapAutocomplete
-        @place_changed='setPlace'
-      />
-      <button
-        @click='addMarker'
-      >
-        Add
-      </button>
-    </div>
+    
     <br>
     <GmapMap
       :center='center'
