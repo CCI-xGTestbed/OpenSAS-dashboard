@@ -21,7 +21,7 @@ import VueSocketIO from 'vue-socket.io'
 import * as io from "socket.io-client";
 Vue.use(new VueSocketIO({
   debug: true,
-  connection: 'http://38.68.232.195:8000',
+  connection: 'http://10.147.20.114:8000',
   options: {  transports: ['websocket', 'polling',  'flashsocket'] } //Optional options
 }))
 
@@ -53,7 +53,7 @@ Vue.use(ElementUI, { locale })
 
 Vue.use(VueGoogleMaps, {
   load: {
-    key: 'AIzaSyAqfE9MoEGhEN17IcmQ2hbezoYTZAcAFdQ',
+    key: 'AIzaSyAij8pn83cR5Z8dis1ml3pd2K-xJK8mfr4',
     libraries: 'places'
   }
 })

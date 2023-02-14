@@ -51,49 +51,73 @@ export const constantRoutes = [
       path: 'dashboard',
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: 'Dashboard', icon: 'dashboard' }
+      meta: { title: 'Dashboard', icon: 'el-icon-s-help' }
     }]
   },
 
   {
-    path: '/example',
+    path: '/',
     component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
-    meta: { title: 'All Devices', icon: 'el-icon-s-help' },
-    children: [
-      {
-        path: 'table',
-        name: 'table',
-        component: () => import('@/views/table/index'),
-        meta: { title: 'CBSDs', icon: 'table' }
-      },
-      {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
-      }
-    ]
+    redirect: '/cbsds',
+    children: [{
+      path: 'cbsds',
+      name: 'CBSDs',
+      component: () => import('@/views/cbsds/index'),
+      meta: { title: 'CBSDs', icon: 'table' }
+    }]
   },
 
   {
-    path: '/form',
+    path: '/',
     component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: 'Add CBSD', icon: 'form' }
-      }
-    ]
+    redirect: '/sensors',
+    children: [{
+      path: 'sensors',
+      name: 'ESC',
+      component: () => import('@/views/sensors/index'),
+      meta: { title: 'Sensing', icon: 'dashboard' }
+    }]
   },
+
+  // {
+  //   path: '/example',
+  //   component: Layout,
+  //   redirect: '/example/table',
+  //   name: 'Example',
+  //   meta: { title: 'All Devices', icon: 'el-icon-s-help' },
+  //   children: [
+  //     {
+  //       path: 'table',
+  //       name: 'table',
+  //       component: () => import('@/views/table/index'),
+  //       meta: { title: 'CBSDs', icon: 'table' }
+  //     },
+  //     {
+  //       path: 'tree',
+  //       name: 'Tree',
+  //       component: () => import('@/views/tree/index'),
+  //       meta: { title: 'Tree', icon: 'tree' }
+  //     }
+  //   ]
+  // },
+
+  // {
+  //   path: '/form',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       name: 'Form',
+  //       component: () => import('@/views/form/index'),
+  //       meta: { title: 'Add CBSD', icon: 'form' }
+  //     }
+  //   ]
+  // },
 
   {
     path: '/nested',
     component: Layout,
-    redirect: '/nested/menu1',
+    redirect: '/nested/menu2',
     name: 'Nested',
     meta: {
       title: 'Spectrum View',
@@ -104,14 +128,14 @@ export const constantRoutes = [
         path: 'menu2',
         component: () => import('@/views/nested/menu2/index'),
         name: 'Menu2',
-        meta: { title: 'View 1' }
+        meta: { title: 'Spectrum View' }
       },
-      {
-        path: 'menu3',
-        component: () => import('@/views/nested/menu3/index'),
-        name: 'Menu3',
-        meta: { title: 'View 2' }
-      }
+      // {
+      //   path: 'menu3',
+      //   component: () => import('@/views/nested/menu3/index'),
+      //   name: 'Menu3',
+      //   meta: { title: 'View 2' }
+      // }
     ]
   },
 
@@ -120,8 +144,8 @@ export const constantRoutes = [
     component: Layout,
     children: [
       {
-        path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
-        meta: { title: 'External Link', icon: 'link' }
+        path: 'https://github.com/CCI-NextG-Testbed',
+        meta: { title: 'GitHub', icon: 'link' }
       }
     ]
   },
