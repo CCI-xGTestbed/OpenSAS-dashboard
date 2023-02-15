@@ -1,14 +1,17 @@
 <template>
   <div>
     <h4 class="spectrum-view-title">CBSDs</h4>
-    <div
-      v-for="item in Spectrum"
-      v-bind:key="item"
-    > 
-      <div class="spectrum-elements">
-        <!-- <div class="spectrum-range-text" :class="{ spectrum_available: !item.isUsed, spectrum_granted: item.usePriority == 1, spectrum_gaa: item.usePriority == 2, spectrum_pal: item.usePriority == 3, spectrum_incumbent: item.usePriority == 4 }">{{ item.name }}</div> -->
-        <div class="spectrum-details-text">{{item.fccId}}</div>
-        <div class="cbsd-status-text" :class="{ cbsd_reg: item.state == 1, cbsd_grant: item.state == 2, cbsd_trans: item.state == 3 }">{{ item.stateText }}</div>
+    <h8 class="spectrum-view-subtitle">  A list of the CBSDs registered with the OpenSAS</h8>
+    
+      <div
+        v-for="item in Spectrum"
+        v-bind:key="item"
+      > 
+        <div class="spectrum-elements">
+          <!-- <div class="spectrum-range-text" :class="{ spectrum_available: !item.isUsed, spectrum_granted: item.usePriority == 1, spectrum_gaa: item.usePriority == 2, spectrum_pal: item.usePriority == 3, spectrum_incumbent: item.usePriority == 4 }">{{ item.name }}</div> -->
+          <div class="spectrum-details-text">{{item.fccId}}</div>
+          <div class="cbsd-status-text" :class="{ cbsd_reg: item.state == 1, cbsd_grant: item.state == 2, cbsd_trans: item.state == 3 }">{{ item.stateText }}</div>
+        </div>
       </div>
     </div>
   </div>
@@ -139,7 +142,11 @@ export default {
   padding-bottom: 8px;
 }
 
-
+.spectrum-view-subtitle {
+  padding-top: 18px;
+  padding-left: 16px;
+  padding-bottom: 8px;
+}
 .card-text-size {
   font-size: 12px !important;
   margin-left: 8px;

@@ -1,14 +1,17 @@
 <template>
   <div>
     <h4 class="spectrum-view-title">Spectrum Usage</h4>
-    <div
-      v-for="item in Spectrum"
-      v-bind:key="item"
-    > 
-      <div class="spectrum-elements">
-        <div class="spectrum-range-text" :class="{ spectrum_available: !item.isUsed, spectrum_granted: item.usePriority == 1, spectrum_gaa: item.usePriority == 2, spectrum_pal: item.usePriority == 3, spectrum_incumbent: item.usePriority == 4 }">{{ item.name }}</div>
-        <div v-if="!item.isUsed" class="spectrum-details-text">Available</div>
-        <div v-else class="spectrum-details-text">Occupied - {{item.fccId}} - {{item.stateText}}</div>
+    <h8 class="spectrum-view-subtitle">  Real time spectrum usage based on grants given out by the OpenSAS and data from RF sensors</h8>
+    <div class="spectrum-elements-holder">
+      <div
+        v-for="item in Spectrum"
+        v-bind:key="item"
+      > 
+        <div class="spectrum-elements">
+          <div class="spectrum-range-text" :class="{ spectrum_available: !item.isUsed, spectrum_granted: item.usePriority == 1, spectrum_gaa: item.usePriority == 2, spectrum_pal: item.usePriority == 3, spectrum_incumbent: item.usePriority == 4 }">{{ item.name }}</div>
+          <div v-if="!item.isUsed" class="spectrum-details-text">Available</div>
+          <div v-else class="spectrum-details-text">Occupied - {{item.fccId}} - {{item.stateText}}</div>
+        </div>
       </div>
     </div>
   </div>
@@ -246,7 +249,15 @@ export default {
   padding-bottom: 8px;
 }
 
+.spectrum-view-subtitle {
+  padding-top: 18px;
+  padding-left: 16px;
+  padding-bottom: 8px;
+}
 
+.spectrum-elements-holder {
+  margin-top: 10px;
+}
 .card-text-size {
   font-size: 12px !important;
   margin-left: 8px;

@@ -3,19 +3,20 @@
     <!-- <h4 class="spectrum-view-title">Environment Sensing</h4> -->
     <div>
     <h4 class="spectrum-view-title">Spectrum Sensing</h4>
+    <h8 class="spectrum-view-subtitle">  Presents power level in each 10 MHz channel from RF Sensors</h8>
     </div>
     <div>
     <div class="sensor-view">
       <div class="power-bar-holder">
         <div v-for="channel in powers.channels" :key="channel">
-          <div class="power-bar" :style="{ bottom:  (0 + 3 * channel.power) + 'px', height:  + (400 + 3 * channel.power) + 'px'}"></div>
+          <div class="power-bar" :style="{ bottom:  (0 + 3 * channel.power) + 'px', height:  + (400 + 3 * channel.power) + 'px'}"><div class="power-value">{{ channel.power + "dBm" }}</div></div>
           
         </div>
         <div class="power-bar-invisible" :style="{ bottom:  0 + 'px', height:  + (400 ) + 'px'}"></div>
       </div>
       <div class="text-bar-holder">
         <div v-for="channel,index in powers.channels" :key="channel">
-          <div class="channel-text">Ch {{index + 1}}</div>
+          <div class="channel-text">Ch{{index + 1}}</div>
         </div>
       </div>
     </div>
@@ -35,7 +36,7 @@ export default {
         ],
         powers: {
           channels:[
-            {name: "Channel 1", power: 10},{name: "Channel 2", power: 10},{name: "Channel 3", power: 10}
+            {name: "Channel1", power: -100},{name: "Channel2", power: -100},{name: "Channel3", power: -100},{name: "Channel4", power: -100},{name: "Channel5", power: -100},{name: "Channel6", power: -100},{name: "Channel7", power: -100},{name: "Channel8", power: -100},{name: "Channel9", power: -100},{name: "Channel10", power: -100},{name: "Channel11", power: -100},{name: "Channel12", power: -100},{name: "Channel14", power: -100},{name: "Channel15", power: -100}
           ]
         }
     };
@@ -117,10 +118,18 @@ export default {
     width: 30px;
     background-color: rgb(123, 205, 0);
     float: left;
-    margin: 15px;
+    margin: 20px;
     display: list-item;
     list-style-type: none;
     position: relative;
+}
+
+.power-value {
+  position: relative;
+  bottom: 24px;
+  font-size: 12px;
+  right: 10px;
+  font-weight: bold;
 }
 
 .power-bar-invisible {
@@ -136,15 +145,16 @@ export default {
 .channel-text {
     width: 30px;
     float: left;
-    margin: 15px;
+    margin: 20px;
     display: list-item;
     list-style-type: none;
     position: relative;
+    font-weight: bold;
 }
 
 .text-bar-holder {
   position: relative;
-  margin-left: 24px;
+  margin-left: 18px;
   bottom: 10px;
   display: flex;
   flex-grow: 1;
@@ -206,6 +216,11 @@ export default {
   padding-bottom: 8px;
 }
 
+.spectrum-view-subtitle {
+  padding-top: 18px;
+  padding-left: 16px;
+  padding-bottom: 8px;
+}
 
 .card-text-size {
   font-size: 12px !important;
