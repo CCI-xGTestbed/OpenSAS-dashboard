@@ -32,8 +32,16 @@ export default {
     $props: {
       handler() {
         if (this.$props.List.length > 0){
-          this.center = this.List[0].position;
-          this.zoom = 19;
+          if(this.$route.query.lat){
+            var location_rec = {lat: parseFloat(this.$route.query.lat), lng: parseFloat(this.$route.query.long)}
+            console.log(location_rec)
+            this.center = location_rec
+            
+          }
+          else{
+            this.center = this.List[0].position;
+          }
+          this.zoom = 18;
         }
       },
       deep: true,
@@ -44,7 +52,7 @@ export default {
   data() {
     return {
       center: { lat: 39.29647910169052, lng: -98.10019483966342 },
-      zoom: 5,
+      zoom: 8,
       currentPlace: null,
       markers: [{
       position:

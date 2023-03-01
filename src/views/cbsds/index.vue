@@ -2,15 +2,25 @@
   <div>
     <h4 class="spectrum-view-title">CBSDs</h4>
     <h8 class="spectrum-view-subtitle">  A list of the CBSDs registered with the OpenSAS</h8>
-    
-      <div
-        v-for="item in Spectrum"
-        v-bind:key="item"
-      > 
-        <div class="spectrum-elements">
-          <!-- <div class="spectrum-range-text" :class="{ spectrum_available: !item.isUsed, spectrum_granted: item.usePriority == 1, spectrum_gaa: item.usePriority == 2, spectrum_pal: item.usePriority == 3, spectrum_incumbent: item.usePriority == 4 }">{{ item.name }}</div> -->
-          <div class="spectrum-details-text">{{item.fccId}}</div>
-          <div class="cbsd-status-text" :class="{ cbsd_reg: item.state == 1, cbsd_grant: item.state == 2, cbsd_trans: item.state == 3 }">{{ item.stateText }}</div>
+      <div class="cbsd-holder">
+        <div class="column-heading column-heading-num">#</div>
+        <div class="column-heading column-heading-fcc">FCC ID</div>
+        <div class="column-heading column-heading-cbsd">CBSD ID</div>
+        <div class="column-heading column-heading-status">Status</div>
+
+        <div class="column-heading column-heading-location">Location</div>
+        <div
+          v-for="(item, index) in Spectrum"
+          v-bind:key="item"
+        > 
+          <div class="cbsd-elements">
+            <!-- <div class="spectrum-range-text" :class="{ spectrum_available: !item.isUsed, spectrum_granted: item.usePriority == 1, spectrum_gaa: item.usePriority == 2, spectrum_pal: item.usePriority == 3, spectrum_incumbent: item.usePriority == 4 }">{{ item.name }}</div> -->
+            <div class="cbsd-details-text cbsd-index">{{index + 1}}</div>
+            <div class="cbsd-details-text cbsd-fcc-id">{{item.fccId}}</div>
+            <div class="cbsd-details-text cbsd-id">{{item.cbsdId}}</div>
+            <div class="cbsd-status-text" :class="{ cbsd_reg: item.state == 1, cbsd_grant: item.state == 2, cbsd_trans: item.state == 3 }">{{ item.stateText }}</div>
+            <div class="cbsd-details-text cbsd-location"><router-link :to="{ path: 'dashboard?lat=' + item.position.lat + '&long=' + item.position.lng }">{{item.location}}</router-link></div>
+          </div>
         </div>
       </div>
     </div>
@@ -86,7 +96,20 @@ export default {
   }
 }
 
-.spectrum-elements {
+.column-heading-num {
+
+  margin-left: 20px;
+}
+
+.column-heading {
+  display: inline-block;
+  margin-right: 80px;
+  font-weight: bold;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.cbsd-elements {
   padding: 8px;
   border-width: thin;
   border-color: #e9ecef;
@@ -130,10 +153,46 @@ export default {
   padding-right: 30px;
 }
 
-.spectrum-details-text {
+.cbsd-details-text {
   font-size: 15px;
   display: inline-block;
-  margin-left: 20px;
+  margin-right: 36px;
+}
+
+.column-heading-cbsd{
+  margin-left: 96px;
+  margin-right: 178px;
+}
+
+.column-heading-status {
+  margin-left: 56px;
+
+}
+
+.column-heading-location {
+  margin-left: 120px;
+
+}
+
+.cbsd-index {
+  margin-left: 10px;
+  margin-right: 0px;
+  width: 80px;
+}
+
+.cbsd-id {
+
+  width: 300px;
+}
+
+.cbsd-fcc-id {
+
+  width: 120px;
+}
+
+.cbsd-location {
+  margin-left: 70px;
+  width: 120px;
 }
 
 .spectrum-view-title {
@@ -153,7 +212,9 @@ export default {
   margin-bottom: 8px;
 }
 
-
+.cbsd-holder {
+  padding: 10px;
+}
 .cbsd_reg {
   border-color: #2568c6;
   background: #b8c8ef;
