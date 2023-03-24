@@ -1,6 +1,5 @@
 <template>
   <div>   
-    <br>
     <GmapMap :center="center" :zoom="zoom" style="width: 100%;  height: 800px;">
       <div :key="index" v-for="(item, index) in this.List" :aria-label="item.cbsdId">
         <div :id="item.cbsdId">
@@ -11,6 +10,7 @@
             v-on:click="cbsdClicked(item.cbsdId)"
           />
           <GmapCircle
+            v-if="item.state === 3"
             :center="item.position"
             :radius="item.distance"
             :options="{ fillColor: '#FF0000', fillOpacity: 0.2, strokeWeight: 0 }"
