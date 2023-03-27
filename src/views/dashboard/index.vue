@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard-container">
     <div>
-    <GoogleMap :List="CbsdList"/>
+    <GoogleMap :List="CbsdList" :Dpas="DpaList"/>
     </div>
     <div :key="index"
         v-for="(item, index) in CbsdList">
@@ -192,7 +192,8 @@ export default {
           //   }, 
           // },
         ],
-      SpectrumList: []
+      SpectrumList: [],
+      DpaList: [],
     };  
   },
   components: {
@@ -201,6 +202,7 @@ export default {
   
   created(){
     this.$socket.emit('getCbsdList', '')
+    this.$socket.emit('getDpaList', '')
     this.$root.$on('cbsd_clicked', (id) => {
       console.log(id)
       this.$root.$emit('bv::toggle::collapse', id)
@@ -219,6 +221,7 @@ export default {
         connect: function () {
           console.log('socket connected')
           this.$socket.emit('getCbsdList', '')
+          this.$socket.emit('getDpaList', '')
         },
         disconnect: function() {
           console.log('socket disconnected')
@@ -233,7 +236,11 @@ export default {
         spectrumUpdate: function (data) {
           console.log("Spectrum update received")
           this.SpectrumList = data;
-        }
+        },
+        dpaUpdate: function (data) {
+          console.log("Dpa update received")
+          this.DpaList = data;
+        },
   },
   computed: {
     ...mapGetters(["name"]),

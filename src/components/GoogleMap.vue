@@ -15,15 +15,40 @@
             :radius="item.distance"
             :options="{ fillColor: '#FF0000', fillOpacity: 0.2, strokeWeight: 0 }"
           />
+
         </div>
       </div>
+      <div
+      v-for="(item, index) in this.Dpas"
+      :key="index"
+      :aria-label="item.id"
+    >
+      <div :id="item.id">
+        <GmapMarker
+          v-if="item.active"
+          :position="{ lat: item.latitude, lng: item.longitude }"
+          :icon="require('@/assets/logos/antenna-6.png')"
+          :label="item.id"
+        />
+        <GmapCircle
+          v-if="item.active"
+          :center="{ lat: item.latitude, lng: item.longitude }"
+          :radius="item.radius"
+          :options="{
+            fillColor: '#87CEFA',
+            fillOpacity: 0.4,
+            strokeWeight: 0,
+          }"
+        />
+      </div>
+    </div>
     </GmapMap>
   </div>
 </template>
 
 <script>
 export default {
-  props: [ 'List'  ],
+  props: [ 'List', 'Dpas'  ],
   watch: {
     $props: {
       handler() {
