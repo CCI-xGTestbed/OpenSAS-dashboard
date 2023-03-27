@@ -1,26 +1,22 @@
 <template>
-  <div>
-    
-    <br>
-    <GmapMap
-      :center='center'
-      :zoom='zoom'
-      style='width: 100%;  height: 800px;'
-    >
-    <div :key="index"
-        v-for="(item, index) in this.List"
-        :aria-label="item.cbsdId"
-        
-        >
+  <div>   
+    <GmapMap :center="center" :zoom="zoom" style="width: 100%;  height: 800px;">
+      <div :key="index" v-for="(item, index) in this.List" :aria-label="item.cbsdId">
         <div :id="item.cbsdId">
-      <GmapMarker
-        :position="item.position"
-        :icon="require (`@/assets/logos/antenna-6.png`)"
-        :label="item.fccId"
-        v-on:click="cbsdClicked(item.cbsdId)"
-      />
-    </div>
-    </div>
+          <GmapMarker
+            :position="item.position"
+            :icon="require('@/assets/logos/antenna-6.png')"
+            :label="item.fccId"
+            v-on:click="cbsdClicked(item.cbsdId)"
+          />
+          <GmapCircle
+            v-if="item.state === 3"
+            :center="item.position"
+            :radius="item.distance"
+            :options="{ fillColor: '#FF0000', fillOpacity: 0.2, strokeWeight: 0 }"
+          />
+        </div>
+      </div>
     </GmapMap>
   </div>
 </template>
@@ -61,7 +57,7 @@ export default {
           lng: -77.11567323046333
         },
       icon: {
-        url: require (`@/assets/logos/wifi-logo.png`),
+        url: require (`@/assets/logos/antenna-6.png`),
         scaledSize: {width: 40, height: 40},
         labelOrigin: {x: 16, y: -10}
         },

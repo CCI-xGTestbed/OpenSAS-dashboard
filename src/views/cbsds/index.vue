@@ -239,5 +239,6 @@ export default {
   margin-left: 15px;
   padding-left: 30px;
   padding-right: 30px;
+  min-width: 124px;
 }
 </style>

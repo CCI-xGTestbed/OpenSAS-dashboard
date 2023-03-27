@@ -4,13 +4,36 @@
     <div>
     <h4 class="spectrum-view-title">Spectrum Sensing</h4>
     <h8 class="spectrum-view-subtitle">  Presents power level in each 10 MHz channel from RF Sensors</h8>
+    <div v-if="powers.sensor_id">
+      <div class="sensor-details">
+        <div>Sensor ID: {{ powers.sensor_id }}</div>
+        <div>Latitude: {{ powers.lat }}</div>
+        <div>Longitude: {{ powers.lon }}</div>
+      </div>
+    </div>
+    <div v-else>
+      <div class="sensor-details">
+        <p>No sensors connected</p>
+      </div>
+    </div>
+
     </div>
     <div>
     <div class="sensor-view">
       <div class="power-bar-holder">
         <div v-for="channel in powers.channels" :key="channel">
-          <div class="power-bar" :style="{ bottom:  (0 + 3 * channel.power) + 'px', height:  + (400 + 3 * channel.power) + 'px'}"><div class="power-value">{{ channel.power + "dBm" }}</div></div>
-          
+          <div
+            class="power-bar"
+            :class="{ 'power-bar-detected': channel.detected }"
+            :style="{
+              bottom: (0 + 3 * channel.power) + 'px',
+              height: (400 + 3 * channel.power) + 'px',
+            }"
+          >
+            <div v-if="channel.detected" class="detected-text">{{ channel.signal }}</div>
+            <div v-if="channel.detected" class="detected-pointer">|</div>
+            <div class="power-value" :class="{'power-value-detected': channel.detected }">{{ channel.power.toFixed(1) + "dBm" }}</div>
+          </div>
         </div>
         <div class="power-bar-invisible" :style="{ bottom:  0 + 'px', height:  + (400 ) + 'px'}"></div>
       </div>
@@ -102,15 +125,41 @@ export default {
   }
 }
 
+.sensor-details {
+  font-size: 14px;
+  margin-top: 8px;
+  margin-left: 16px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #f5f5f5;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.sensor-details div {
+  margin-bottom: 4px;
+}
+
+.detected-text {
+  position: relative;
+  bottom: 66px;
+  left: -14px;
+}
+
+.detected-pointer {
+  position: relative;
+  bottom: 70px;
+  left: 14px;
+}
+
 .sensor-view{
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  position: relative
 }
 .power-bar-holder {
   position: relative;
   bottom: 0;
-  margin-top: 35vh;
+  margin-top: 32vh;
   margin-left: 20px;
   display: flex;
 }
@@ -124,9 +173,25 @@ export default {
     position: relative;
 }
 
+.power-bar-undetected {
+  background-color: green; 
+}
+
+.power-bar-detected {
+  background-color: orange; 
+}
+
 .power-value {
   position: relative;
   bottom: 24px;
+  font-size: 12px;
+  right: 10px;
+  font-weight: bold;
+}
+
+.power-value-detected {
+  position: relative;
+  bottom: 72px;
   font-size: 12px;
   right: 10px;
   font-weight: bold;
