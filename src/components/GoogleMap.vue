@@ -21,14 +21,14 @@
       <div
       v-for="(item, index) in this.Dpas"
       :key="index"
-      :aria-label="item.id"
+      :aria-label="item.name"
     >
       <div :id="item.id">
         <GmapMarker
           v-if="item.active"
           :position="{ lat: item.latitude, lng: item.longitude }"
           :icon="require('@/assets/logos/antenna-6.png')"
-          :label="item.id"
+          :label="item.name"
         />
         <GmapCircle
           v-if="item.active"
