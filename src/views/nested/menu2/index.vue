@@ -151,32 +151,37 @@ export default {
   sockets: {
         spectrumUpdate: function (data) {
           console.log("Spectrum update received")
-          for (var i = 0; i < data.length; i+=1){
-            console.log(data[i].fccId);
-            this.Spectrum[data[i].subband - 1].fccId = data[i].fccId;
-            this.Spectrum[data[i].subband - 1].cbsdId = data[i].cbsdId;
-            this.Spectrum[data[i].subband - 1].stateText = data[i].stateText;
+          for (var j = 0; j < this.Spectrum.length; j++){
+            for (var i = 0; i < data.length; i+=1){
+              if(j == data[i].subband - 1){
+                console.log(data[i].fccId);
+                this.Spectrum[data[i].subband - 1].fccId = data[i].fccId;
+                this.Spectrum[data[i].subband - 1].cbsdId = data[i].cbsdId;
+                this.Spectrum[data[i].subband - 1].stateText = data[i].stateText;
 
-            if (data[i].state < 2){
-              this.Spectrum[data[i].subband - 1].usePriority = 0;
-              this.Spectrum[data[i].subband - 1].isUsed = false;
-            }
-            else if (data[i].state == 2){
-              this.Spectrum[data[i].subband - 1].usePriority = 1;
-              this.Spectrum[data[i].subband - 1].isUsed = true;
-            }
-            else{
-              if (data.accessPriority == "PAL"){
-                this.Spectrum[data[i].subband - 1].usePriority = 3;
-                this.Spectrum[data[i].subband - 1].isUsed = true;
-              }
-              else{
-                this.Spectrum[data[i].subband - 1].usePriority = 2;
-                this.Spectrum[data[i].subband - 1].isUsed = true;
+                if (data[i].state < 2){
+                  this.Spectrum[data[i].subband - 1].usePriority = 0;
+                  this.Spectrum[data[i].subband - 1].isUsed = false;
+                }
+                else if (data[i].state == 2){
+                  this.Spectrum[data[i].subband - 1].usePriority = 1;
+                  this.Spectrum[data[i].subband - 1].isUsed = true;
+                  break;
+                }
+                else{
+                  if (data.accessPriority == "PAL"){
+                    this.Spectrum[data[i].subband - 1].usePriority = 3;
+                    this.Spectrum[data[i].subband - 1].isUsed = true;
+                  }
+                  else{
+                    this.Spectrum[data[i].subband - 1].usePriority = 2;
+                    this.Spectrum[data[i].subband - 1].isUsed = true;
+                  }
+                  break;
+                }
               }
             }
           }
-
         }
   },
 };
