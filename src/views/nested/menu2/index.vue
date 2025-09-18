@@ -1,16 +1,28 @@
 <template>
   <div>
     <h4 class="spectrum-view-title">Spectrum Usage</h4>
-    <h8 class="spectrum-view-subtitle">  Real time spectrum usage based on grants given out by the OpenSAS and data from RF sensors</h8>
+    <h8 class="spectrum-view-subtitle">
+      Real time spectrum usage based on grants given out by the OpenSAS and data from RF sensors
+    </h8>
     <div class="spectrum-elements-holder">
-      <div
-        v-for="item in Spectrum"
-        v-bind:key="item"
-      > 
+      <div v-for="item in Spectrum" :key="item.name">
         <div class="spectrum-elements">
-          <div class="spectrum-range-text" :class="{ spectrum_available: !item.isUsed, spectrum_granted: item.usePriority == 1, spectrum_gaa: item.usePriority == 2, spectrum_pal: item.usePriority == 3, spectrum_incumbent: item.usePriority == 4 }">{{ item.name }}</div>
+          <div
+            class="spectrum-range-text"
+            :class="{
+              spectrum_available: !item.isUsed,
+              spectrum_granted: item.usePriority == 1,
+              spectrum_gaa: item.usePriority == 2,
+              spectrum_pal: item.usePriority == 3,
+              spectrum_incumbent: item.usePriority == 4
+            }"
+          >
+            {{ item.name }}
+          </div>
           <div v-if="!item.isUsed" class="spectrum-details-text">Available</div>
-          <div v-else class="spectrum-details-text">Occupied - {{item.fccId}} - {{item.stateText}}</div>
+          <div v-else class="spectrum-details-text">
+            Occupied - {{ item.fccId }} - {{ item.stateText }}
+          </div>
         </div>
       </div>
     </div>
@@ -18,171 +30,87 @@
 </template>
 
 <script>
-import io from 'socket.io-client';
+import io from "socket.io-client";
+
 export default {
   name: "Dashboard",
   data() {
     return {
       socket: io(),
       Spectrum: [
-          {
-            name: "3.550 - 3.560 GHz",
-            isUsed: false,
-            usePriority: 0,
-            fccId: "",
-            stateText: '',
-            cbsdId: "CBSD-CCI-A",
-          },
-          {
-            name: "3.560 - 3.570 GHz",
-            isUsed: false,
-            usePriority: 0,
-            fccId: "",
-            stateText: '',
-            cbsdId: "A",
-          },
-          {
-            name: "3.570 - 3.580 GHz",
-            isUsed: false,
-            usePriority: 0,
-            fccId: "",
-            stateText: '',
-            cbsdId: "CBSD-CCI-B",
-          },
-          {
-            name: "3.580 - 3.590 GHz",
-            isUsed: false,
-            usePriority: 0,
-            fccId: "",
-            stateText: '',
-            cbsdId: "A",
-          },
-          {
-            name: "3.590 - 3.600 GHz",
-            isUsed: false,
-            usePriority: 0,
-            fccId: "",
-            stateText: '',
-            cbsdId: "A",
-          },
-          {
-            name: "3.600 - 3.610 GHz",
-            isUsed: false,
-            usePriority: 0,
-            fccId: "",
-            stateText: '',
-            cbsdId: "A",
-          },
-          {
-            name: "3.610 - 3.620 GHz",
-            isUsed: false,
-            usePriority: 0,
-            fccId: "",
-            stateText: '',
-            cbsdId: "CBSD-CCI-PAL-B",
-          },
-          {
-            name: "3.620 - 3.630 GHz",
-            isUsed: false,
-            usePriority: 0,
-            fccId: "",
-            stateText: '',
-            cbsdId: "A",
-          },
-          {
-            name: "3.630 - 3.640 GHz",
-            isUsed: false,
-            usePriority: 0,
-            fccId: "",
-            stateText: '',
-            cbsdId: "",
-          },
-          {
-            name: "3.640 - 3.650 GHz",
-            isUsed: false,
-            usePriority: 0,
-            fccId: "",
-            stateText: '',
-            cbsdId: "A",
-          },
-          {
-            name: "3.650 - 3.660 GHz",
-            isUsed: false,
-            usePriority: 0,
-            fccId: "",
-            stateText: '',
-            cbsdId: "A",
-          },
-          {
-            name: "3.660 - 3.670 GHz",
-            isUsed: false,
-            usePriority: 0,
-            fccId: "",
-            stateText: '',
-            cbsdId: "A",
-          },
-          {
-            name: "3.670 - 3.680 GHz",
-            isUsed: false,
-            usePriority: 0,
-            fccId: "",
-            stateText: '',
-            cbsdId: "A",
-          },
-          {
-            name: "3.680 - 3.690 GHz",
-            isUsed: false,
-            usePriority: 0,
-            fccId: "",
-            stateText: '',
-            cbsdId: "A",
-          },
-          {
-            name: "3.690 - 3.700 GHz",
-            isUsed: false,
-            usePriority: 0,
-            fccId: "",
-            stateText: '',
-            cbsdId: "A",
-          },
-        ],
+        { name: "3.550 - 3.560 GHz", isUsed: false, usePriority: 0, fccId: "", stateText: "", cbsdId: "CBSD-CCI-A" },
+        { name: "3.560 - 3.570 GHz", isUsed: false, usePriority: 0, fccId: "", stateText: "", cbsdId: "A" },
+        { name: "3.570 - 3.580 GHz", isUsed: false, usePriority: 0, fccId: "", stateText: "", cbsdId: "CBSD-CCI-B" },
+        { name: "3.580 - 3.590 GHz", isUsed: false, usePriority: 0, fccId: "", stateText: "", cbsdId: "A" },
+        { name: "3.590 - 3.600 GHz", isUsed: false, usePriority: 0, fccId: "", stateText: "", cbsdId: "A" },
+        { name: "3.600 - 3.610 GHz", isUsed: false, usePriority: 0, fccId: "", stateText: "", cbsdId: "A" },
+        { name: "3.610 - 3.620 GHz", isUsed: false, usePriority: 0, fccId: "", stateText: "", cbsdId: "CBSD-CCI-PAL-B" },
+        { name: "3.620 - 3.630 GHz", isUsed: false, usePriority: 0, fccId: "", stateText: "", cbsdId: "A" },
+        { name: "3.630 - 3.640 GHz", isUsed: false, usePriority: 0, fccId: "", stateText: "", cbsdId: "" },
+        { name: "3.640 - 3.650 GHz", isUsed: false, usePriority: 0, fccId: "", stateText: "", cbsdId: "A" },
+        { name: "3.650 - 3.660 GHz", isUsed: false, usePriority: 0, fccId: "", stateText: "", cbsdId: "A" },
+        { name: "3.660 - 3.670 GHz", isUsed: false, usePriority: 0, fccId: "", stateText: "", cbsdId: "A" },
+        { name: "3.670 - 3.680 GHz", isUsed: false, usePriority: 0, fccId: "", stateText: "", cbsdId: "A" },
+        { name: "3.680 - 3.690 GHz", isUsed: false, usePriority: 0, fccId: "", stateText: "", cbsdId: "A" },
+        { name: "3.690 - 3.700 GHz", isUsed: false, usePriority: 0, fccId: "", stateText: "", cbsdId: "A" },
+      ],
     };
   },
   sockets: {
-        spectrumUpdate: function (data) {
-          console.log("Spectrum update received")
-          for (var j = 0; j < this.Spectrum.length; j++){
-            for (var i = 0; i < data.length; i+=1){
-              if(j == data[i].subband - 1){
-                console.log(data[i].fccId);
-                this.Spectrum[data[i].subband - 1].fccId = data[i].fccId;
-                this.Spectrum[data[i].subband - 1].cbsdId = data[i].cbsdId;
-                this.Spectrum[data[i].subband - 1].stateText = data[i].stateText;
+    spectrumUpdate(data) {
+      console.log("Spectrum update received:", data);
 
-                if (data[i].state < 2){
-                  this.Spectrum[data[i].subband - 1].usePriority = 0;
-                  this.Spectrum[data[i].subband - 1].isUsed = false;
-                }
-                else if (data[i].state == 2){
-                  this.Spectrum[data[i].subband - 1].usePriority = 1;
-                  this.Spectrum[data[i].subband - 1].isUsed = true;
-                  break;
-                }
-                else{
-                  if (data.accessPriority == "PAL"){
-                    this.Spectrum[data[i].subband - 1].usePriority = 3;
-                    this.Spectrum[data[i].subband - 1].isUsed = true;
-                  }
-                  else{
-                    this.Spectrum[data[i].subband - 1].usePriority = 2;
-                    this.Spectrum[data[i].subband - 1].isUsed = true;
-                  }
-                  break;
-                }
-              }
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].subband != null) {
+          // ✅ Case 1: backend gives explicit subband index
+          const subbandIndex = data[i].subband - 1;
+          if (subbandIndex >= 0 && subbandIndex < this.Spectrum.length) {
+            this.updateSpectrumEntry(subbandIndex, data[i]);
+          }
+        } else if (data[i].low && data[i].high) {
+          // ✅ Case 2: backend gives frequency range
+          const lowMHz = data[i].low / 1e6;
+          const highMHz = data[i].high / 1e6;
+
+          for (let j = 0; j < this.Spectrum.length; j++) {
+            const parts = this.Spectrum[j].name.split(" - ");
+            const startGHz = parseFloat(parts[0]); // in GHz
+            const endGHz = parseFloat(parts[1]);   // in GHz
+
+            // convert to MHz for comparison
+            const startMHz = startGHz * 1000;
+            const endMHz = endGHz * 1000;
+
+            // If subband falls inside the [low, high] range → update it
+            if (startMHz >= lowMHz && endMHz <= highMHz) {
+              this.updateSpectrumEntry(j, data[i]);
             }
           }
         }
+      }
+    },
+  },
+  methods: {
+    updateSpectrumEntry(index, entry) {
+      this.Spectrum[index].fccId = entry.fccId;
+      this.Spectrum[index].cbsdId = entry.cbsdId;
+      this.Spectrum[index].stateText = entry.stateText;
+
+      if (entry.state < 2) {
+        this.Spectrum[index].usePriority = 0;
+        this.Spectrum[index].isUsed = false;
+      } else if (entry.state == 2) {
+        this.Spectrum[index].usePriority = 1;
+        this.Spectrum[index].isUsed = true;
+      } else {
+        if (entry.accessPriority === "PAL") {
+          this.Spectrum[index].usePriority = 3;
+        } else {
+          this.Spectrum[index].usePriority = 2;
+        }
+        this.Spectrum[index].isUsed = true;
+      }
+    },
   },
 };
 </script>
@@ -269,3 +197,4 @@ export default {
   margin-bottom: 8px;
 }
 </style>
+
